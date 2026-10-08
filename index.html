@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arena RPG</title>
+<style>
+html,body{margin:0;height:100%;background:#111;color:#eee;font:13px sans-serif;overflow:hidden}
+#game{position:absolute;inset:0}
+#login{position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;background:#111e;z-index:9}
+#login input,#login select,button{font:inherit;padding:6px 10px;border-radius:4px;border:1px solid #555;background:#222;color:#eee}
+button{cursor:pointer}button:disabled{opacity:.4}
+#hud{display:none}
+#top{position:absolute;top:6px;left:6px;background:#000a;padding:6px;border-radius:6px;max-width:92vw}
+#top div{margin-bottom:4px}
+#banner{position:absolute;top:30%;width:100%;text-align:center;font-size:42px;font-weight:bold;text-shadow:0 0 6px #000;pointer-events:none}
+#chat{position:absolute;left:6px;bottom:6px;width:320px;max-width:60vw;background:#000a;padding:6px;border-radius:6px}
+#log{height:110px;overflow-y:auto;word-break:break-word}
+#chat input{width:100%;box-sizing:border-box;margin-top:4px;padding:4px;background:#222;color:#eee;border:1px solid #555}
+.panel{position:absolute;right:6px;top:6px;width:240px;max-height:70vh;overflow-y:auto;background:#000c;padding:8px;border-radius:6px;display:none}
+.panel div{margin:3px 0}
+</style></head><body>
+<div id="game"></div>
+<div id="login">
+  <h2>Arena RPG</h2>
+  <input id="name" placeholder="Name" maxlength="16" autocomplete="username">
+  <input id="pass" type="password" placeholder="Password" autocomplete="current-password">
+  <select id="cls"><option value="warrior">Warrior</option><option value="mage">Mage</option><option value="ranger">Ranger</option><option value="assassin">Assassin</option></select>
+  <small>New name = new account (class is chosen here). Existing name = login.</small>
+  <button id="go">Play</button><div id="err" style="color:#f66"></div>
+</div>
+<div id="hud">
+  <div id="top">
+    <div id="stats"></div>
+    <div>
+      <button data-z="town">Town</button><button data-z="field">Field</button><button data-z="dungeon">Dungeon (Lv5)</button>
+      <button id="q">Ranked 1v1</button><button id="uq">Cancel</button>
+      <button id="binv">Inventory</button><button id="blb">Leaderboard</button>
+    </div>
+    <small>Move WASD / arrows. Attack: click or Space. Skill: Q</small>
+  </div>
+  <div id="banner"></div>
+  <div id="inv" class="panel"></div>
+  <div id="lb" class="panel"></div>
+  <div id="chat"><div id="log"></div><input id="msg" maxlength="120" placeholder="Chat (Enter)"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+<script src="game.js"></script>
+</body></html>
