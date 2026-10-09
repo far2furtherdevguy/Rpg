@@ -18,7 +18,8 @@ const send = o => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
 // ---------- network ----------
 $('go').onclick = () => {
   $('err').textContent = '';
-  ws = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host);
+  const host = location.hostname.endsWith('netlify.app') ? 'rpgfirstversion.onrender.com' : location.host;
+  ws = new WebSocket((location.protocol === 'https:' || host.endsWith('onrender.com') ? 'wss://' : 'ws://') + host);
   ws.onopen = () => send({ t: 'auth', name: $('name').value, pass: $('pass').value, cls: $('cls').value });
   ws.onmessage = e => onMsg(JSON.parse(e.data));
   ws.onclose = () => { snap = null; $('hud').style.display = 'none'; $('login').style.display = 'flex'; if (!$('err').textContent) $('err').textContent = 'Disconnected'; };
